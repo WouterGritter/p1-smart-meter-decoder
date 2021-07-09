@@ -10,7 +10,9 @@ def serial_thread():
     global last_reading
 
     while True:
-        last_reading = smart_meter.read_p1_packet()
+        reading = smart_meter.read_p1_packet()
+        if reading is not None:
+            last_reading = smart_meter.read_p1_packet()
 
 
 thread = threading.Thread(target=serial_thread)
