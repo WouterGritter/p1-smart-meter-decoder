@@ -1,6 +1,18 @@
+import os
+
+from dotenv import load_dotenv
+
 from smart_meter import SmartMeter
 
-meter = SmartMeter('COM3', 115200)
+load_dotenv()
+
+SERIAL_PORT = os.getenv('SERIAL_PORT')
+SERIAL_SPEED = int(os.getenv('SERIAL_SPEED'))
+
+print(f'{SERIAL_PORT=}')
+print(f'{SERIAL_SPEED=}')
+
+meter = SmartMeter(SERIAL_PORT, SERIAL_SPEED)
 
 while True:
     reading = meter.read_p1_packet()

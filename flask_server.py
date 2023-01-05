@@ -1,8 +1,20 @@
+import os
+
+from dotenv import load_dotenv
+
 from smart_meter import SmartMeter
 import threading
 from flask import Flask, jsonify
 
-smart_meter = SmartMeter('COM3', 115200)
+load_dotenv()
+
+SERIAL_PORT = os.getenv('SERIAL_PORT')
+SERIAL_SPEED = int(os.getenv('SERIAL_SPEED'))
+
+print(f'{SERIAL_PORT=}')
+print(f'{SERIAL_SPEED=}')
+
+smart_meter = SmartMeter(SERIAL_PORT, SERIAL_SPEED)
 last_reading = None
 
 
