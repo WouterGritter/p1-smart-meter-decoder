@@ -83,7 +83,7 @@ def decode_version(line):
 
 
 def decode_timestamp(data):
-    return datetime.datetime(
+    decoded_date = datetime.datetime(
         int(data[0:2]) + 2000,  # year
         int(data[2:4]),         # month
         int(data[4:6]),         # day
@@ -91,6 +91,8 @@ def decode_timestamp(data):
         int(data[8:10]),        # minute
         int(data[10:12]),       # second
     )
+
+    return str(decoded_date)
 
 
 def decode_equipment_identifier(line):
