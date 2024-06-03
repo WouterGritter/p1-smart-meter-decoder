@@ -51,10 +51,10 @@ def publish_mqtt(reading):
 
     current = reading['current_readings']
 
-    power_l1 = (current['L1']['power_delivery'] - current['L1']['power_delivery']) * 1000
-    power_l2 = (current['L2']['power_delivery'] - current['L2']['power_delivery']) * 1000
-    power_l3 = (current['L3']['power_delivery'] - current['L3']['power_delivery']) * 1000
-    power_total = (current['total']['power_delivery'] - current['total']['power_delivery']) * 1000
+    power_l1 = (current['L1']['power_delivery'] - current['L1']['power_redelivery']) * 1000
+    power_l2 = (current['L2']['power_delivery'] - current['L2']['power_redelivery']) * 1000
+    power_l3 = (current['L3']['power_delivery'] - current['L3']['power_redelivery']) * 1000
+    power_total = (current['total']['power_delivery'] - current['total']['power_redelivery']) * 1000
 
     voltage_l1 = current['L1']['voltage']
     voltage_l2 = current['L2']['voltage']
@@ -72,8 +72,8 @@ def publish_mqtt(reading):
     mqttc.publish(mqtt_topic('power/total'), power_total, retain=True)
 
     mqttc.publish(mqtt_topic('voltage/l1'), voltage_l1, retain=True)
-    mqttc.publish(mqtt_topic('voltage/l1'), voltage_l2, retain=True)
-    mqttc.publish(mqtt_topic('voltage/l1'), voltage_l3, retain=True)
+    mqttc.publish(mqtt_topic('voltage/l2'), voltage_l2, retain=True)
+    mqttc.publish(mqtt_topic('voltage/l3'), voltage_l3, retain=True)
     mqttc.publish(mqtt_topic('voltage/average'), voltage_average, retain=True)
 
     mqttc.publish(mqtt_topic('amperage/l1'), amperage_l1, retain=True)
