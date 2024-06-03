@@ -45,9 +45,9 @@ def publish_mqtt(reading):
     delivery = reading['delivery']['low_tariff'] + reading['delivery']['high_tariff']
     redelivery = reading['redelivery']['low_tariff'] + reading['redelivery']['high_tariff']
 
-    mqttc.publish(mqtt_topic('energy/delivery'), delivery, retain=True)
-    mqttc.publish(mqtt_topic('energy/redelivery'), redelivery, retain=True)
-    mqttc.publish(mqtt_topic('energy/total'), delivery - redelivery, retain=True)
+    mqtt_publish('energy/delivery', delivery)
+    mqtt_publish('energy/redelivery', redelivery)
+    mqtt_publish('energy/total', delivery - redelivery)
 
     current = reading['current_readings']
 
