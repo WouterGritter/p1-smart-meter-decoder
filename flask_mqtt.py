@@ -42,8 +42,8 @@ def serial_thread():
 
 
 def publish_mqtt(reading):
-    delivery = reading['delivery/low_tariff'] + reading['delivery/high_tariff']
-    redelivery = reading['redelivery/low_tariff'] + reading['redelivery/high_tariff']
+    delivery = reading['delivery']['low_tariff'] + reading['delivery']['high_tariff']
+    redelivery = reading['redelivery']['low_tariff'] + reading['redelivery']['high_tariff']
 
     mqttc.publish(mqtt_topic('energy/delivery'), delivery, retain=True)
     mqttc.publish(mqtt_topic('energy/redelivery'), redelivery, retain=True)
