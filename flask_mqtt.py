@@ -66,24 +66,25 @@ def publish_mqtt(reading):
     amperage_l3 = power_l3 / voltage_l3
     amperage_total = amperage_l1 + amperage_l2 + amperage_l3
 
-    mqttc.publish(mqtt_topic('power/l1'), power_l1, retain=True)
-    mqttc.publish(mqtt_topic('power/l2'), power_l2, retain=True)
-    mqttc.publish(mqtt_topic('power/l3'), power_l3, retain=True)
-    mqttc.publish(mqtt_topic('power/total'), power_total, retain=True)
+    mqtt_publish('power/l1', power_l1)
+    mqtt_publish('power/l2', power_l2)
+    mqtt_publish('power/l3', power_l3)
+    mqtt_publish('power/total', power_total)
 
-    mqttc.publish(mqtt_topic('voltage/l1'), voltage_l1, retain=True)
-    mqttc.publish(mqtt_topic('voltage/l2'), voltage_l2, retain=True)
-    mqttc.publish(mqtt_topic('voltage/l3'), voltage_l3, retain=True)
-    mqttc.publish(mqtt_topic('voltage/average'), voltage_average, retain=True)
+    mqtt_publish('voltage/l1', voltage_l1)
+    mqtt_publish('voltage/l2', voltage_l2)
+    mqtt_publish('voltage/l3', voltage_l3)
+    mqtt_publish('voltage/average', voltage_average)
 
-    mqttc.publish(mqtt_topic('amperage/l1'), amperage_l1, retain=True)
-    mqttc.publish(mqtt_topic('amperage/l2'), amperage_l2, retain=True)
-    mqttc.publish(mqtt_topic('amperage/l3'), amperage_l3, retain=True)
-    mqttc.publish(mqtt_topic('amperage/total'), amperage_total, retain=True)
+    mqtt_publish('amperage/l1', amperage_l1)
+    mqtt_publish('amperage/l2', amperage_l2)
+    mqtt_publish('amperage/l3', amperage_l3)
+    mqtt_publish('amperage/total', amperage_total)
 
 
-def mqtt_topic(attribute):
-    return MQTT_TOPIC_FORMAT.replace('{attribute}', attribute)
+def mqtt_publish(attribute, value):
+    topic = MQTT_TOPIC_FORMAT.replace('{attribute}', attribute)
+    mqttc.publish(topic, round(value, 2), qos=0, retain=True)
 
 
 thread = threading.Thread(target=serial_thread)
