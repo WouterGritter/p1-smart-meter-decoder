@@ -64,7 +64,7 @@ def publish_mqtt(reading):
     amperage_l1 = power_l1 / voltage_l1
     amperage_l2 = power_l2 / voltage_l2
     amperage_l3 = power_l3 / voltage_l3
-    amperage_total = amperage_l1 + amperage_l2 + amperage_l3
+    amperage_total = abs(amperage_l1) + abs(amperage_l2) + abs(amperage_l3)
 
     mqtt_publish('power/l1', power_l1)
     mqtt_publish('power/l2', power_l2)
