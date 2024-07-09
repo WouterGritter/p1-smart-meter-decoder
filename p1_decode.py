@@ -59,7 +59,7 @@ def p1_decode(reading):
                 'power_redelivery': decode_unit(get_raw_data(find_line(lines, '2.7.0'))[0]),   # kW
             },
         },
-        'gas_usage': decode_unit(get_raw_data(find_line(lines, '24.2.1'))[1]),
+        'gas_usage': decode_unit(get_raw_data(find_line(lines, '24.2.1'))[1]),  # m^3
     }
 
 
