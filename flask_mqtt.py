@@ -81,6 +81,9 @@ def publish_mqtt(reading):
     mqtt_publish('amperage/l3', amperage_l3)
     mqtt_publish('amperage/total', amperage_total)
 
+    gas_usage = reading['gas_usage']
+    mqtt_publish('gas', gas_usage)
+
 
 def mqtt_publish(attribute, value):
     topic = MQTT_TOPIC_FORMAT.replace('{attribute}', attribute)
